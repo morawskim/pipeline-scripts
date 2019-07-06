@@ -1,5 +1,3 @@
-require 'branch'
-
 class VersionHelper
 
   def self.get_version_from_branch_name(branch_name)

@@ -1,4 +1,4 @@
-require 'regex_constants'
+require 'pipeline'
 
 RSpec.describe RegexConstants, "Check commit message" do
   it "should accept with hash and issue number" do

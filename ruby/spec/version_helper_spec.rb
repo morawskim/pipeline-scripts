@@ -1,4 +1,4 @@
-require 'version_helper'
+require 'pipeline'
 
 RSpec.describe VersionHelper, "VersionHelper" do
   context "#get_version_from_branch_name" do

@@ -1,4 +1,4 @@
-require 'branch'
+require 'pipeline'
 
 RSpec.describe Branch, "Check branch name" do
   context "feature" do
