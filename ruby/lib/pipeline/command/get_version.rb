@@ -11,6 +11,10 @@ class GetVersionCommand
       return "#{version}-SNAPSHOT"
     elsif Branch.is_develop_branch?(@branch) || Branch.is_feature_branch?(@branch)
       commit = GitUtils.get_last_merge_commit_message(@git_dir)
+      if commit.nil?
+        return '0.1.0-DEVELOP'
+      end
+
       last_version = GitUtils.get_version_from_merge_commit(commit)
       version = GitUtils.find_next_minor_release(last_version, @git_dir)
       return "#{version}-DEVELOP"

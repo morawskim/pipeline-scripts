@@ -1,7 +1,20 @@
 class GitUtils
   def self.get_last_merge_commit_message(git_dir)
-    # TODO error handling
-    return `git --git-dir=#{git_dir} --no-pager log --oneline --merges |grep -E 'release|hotfix' | head -1`
+    repo = Rugged::Repository.new(git_dir)
+    walker = Rugged::Walker.new(repo)
+    walker.sorting(Rugged::SORT_TOPO)
+    walker.push(repo.head.target.oid)
+
+    merge_commit = nil
+    walker.each do |c|
+      if c.parent_ids.length > 1 && c.summary =~ /release|hotfix/
+        merge_commit = c
+        break
+      end
+    end
+
+    return nil if merge_commit.nil?
+    return merge_commit.summary
   end
 
   def self.get_version_from_merge_commit(message)
@@ -9,9 +22,8 @@ class GitUtils
   end
 
   def self.release_branch_exists?(version, git_dir)
-    # TODO error handling
-    output = `git --git-dir=#{git_dir} branch --remotes |grep release-#{version}`
-    return !output.strip.empty?
+    repo = Rugged::Repository.new(git_dir)
+    repo.branches.each_name(:remote).include? "origin/release-#{version}"
   end
 
   def self.find_next_minor_release(version, git_dir)

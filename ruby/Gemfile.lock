@@ -15,12 +15,14 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.2)
+    rugged (0.28.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   rspec
+  rugged
 
 BUNDLED WITH
    1.16.1
