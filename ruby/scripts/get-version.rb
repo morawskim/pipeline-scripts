@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'bundler'
-Bundler.setup
+Bundler.setup(:default)
 
 require 'rugged'
 require_relative '../lib/pipeline'
