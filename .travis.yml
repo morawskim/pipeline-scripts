@@ -2,8 +2,20 @@ language: ruby
 rvm:
   - 2.6
 
+services:
+  - docker
+
 before_script: cd ruby
 
-script:
-  - "bundle install"
-  - "bundle exec rspec spec"
+jobs:
+  include:
+    - stage: test
+      script:
+        - "bundle install"
+        - "bundle exec rspec spec"
+    - stage: build
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker build -t morawskim/pipeline-scripts .
+        - docker push morawskim/pipeline-scripts
+
