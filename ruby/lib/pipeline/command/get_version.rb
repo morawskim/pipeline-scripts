@@ -21,6 +21,12 @@ class GetVersionCommand
     elsif (@source_branch_name && !@source_branch_name.empty?) && Branch.is_master_branch?(@branch) && (Branch.is_hotfix_branch?(@source_branch_name) || Branch.is_release_branch?(@source_branch_name))
       version = VersionHelper.get_version_from_branch_name(@source_branch_name)
       return version
+    elsif (Branch.is_master_branch?(@branch) && (@source_branch_name.nil? || @source_branch_name.empty?))
+      commit = GitUtils.get_last_merge_commit_message(@git_dir)
+      if commit.nil?
+        raise Exception.new("Not found merge commit for branch master (flow without merge_request)")
+      end
+      return GitUtils.get_version_from_merge_commit(commit)
     else
       raise Exception.new("Can't get version number for branch '#{@branch}' source_branch_name '#{@source_branch_name}'")
     end
