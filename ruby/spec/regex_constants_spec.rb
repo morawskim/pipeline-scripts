@@ -16,4 +16,12 @@ RSpec.describe RegexConstants, "Check commit message" do
   it "should accept utf8 chars" do
       expect('#54 - Gitlab Ci/CD - budowanie obrazów dockera').to match(RegexConstants::COMMIT_TITLE_REGEX)
   end
+
+  it "should accept single quote or double quote" do
+      expect('#99 - \'single quote\' "dobule quote" ').to match(RegexConstants::COMMIT_TITLE_REGEX)
+  end
+
+  it "should accept merge request commit" do
+    expect("Merge branch 'hotfix-0.1.1' into 'master'").to match(RegexConstants::COMMIT_TITLE_REGEX)
+  end
 end
