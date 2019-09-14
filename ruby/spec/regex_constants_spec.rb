@@ -32,4 +32,8 @@ RSpec.describe RegexConstants, "Check commit message" do
   it "should allow plus sign" do
     expect("#66 - deploy minio + instrukcja").to match(RegexConstants::COMMIT_TITLE_REGEX)
   end
+
+  it "should allow for digits in commit title" do
+      expect('#67 - test e2e upload obrazka do minio').to match(RegexConstants::COMMIT_TITLE_REGEX)
+  end
 end
