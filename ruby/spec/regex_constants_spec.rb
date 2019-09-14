@@ -36,4 +36,8 @@ RSpec.describe RegexConstants, "Check commit message" do
   it "should allow for digits in commit title" do
       expect('#67 - test e2e upload obrazka do minio').to match(RegexConstants::COMMIT_TITLE_REGEX)
   end
+
+  it "should allow for merge commit if target branch is not inside quotes" do
+      expect("Merge branch 'master' into develop").to match(RegexConstants::COMMIT_TITLE_REGEX)
+  end
 end
