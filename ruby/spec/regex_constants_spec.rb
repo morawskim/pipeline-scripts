@@ -40,4 +40,9 @@ RSpec.describe RegexConstants, "Check commit message" do
   it "should allow for merge commit if target branch is not inside quotes" do
       expect("Merge branch 'master' into develop").to match(RegexConstants::COMMIT_TITLE_REGEX)
   end
+
+  it "should allow parentheses in commit subject" do
+      expect("#47 - budowanie w procesie CI dokumentacji API (swagger-ui)").to match(RegexConstants::COMMIT_TITLE_REGEX)
+  end
+
 end
