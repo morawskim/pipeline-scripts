@@ -13,11 +13,21 @@ file = File.read(ARGV[0])
 lock = JSON.parse(file)
 packages = {}
 
-lock['packages'].each do |package|
+json_packages = lock['packages'] || []
+json_dev_packages = lock['packages-dev'] || []
+
+json_packages.each do |package|
     version = package['version'].ljust(10, ' ')
     ref = package['source']['reference']
 
     packages[package['name']] = "#{version} #{ref}"
+end
+
+json_dev_packages.each do |package|
+    version = package['version'].ljust(10, ' ')
+    ref = package['source']['reference']
+
+    packages["#{package['name']} (dev)"] = "#{version} #{ref}"
 end
 
 packages = packages.sort_by { |key| key }.to_h
