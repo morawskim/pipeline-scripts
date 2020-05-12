@@ -18,14 +18,14 @@ json_dev_packages = lock['packages-dev'] || []
 
 json_packages.each do |package|
     version = package['version'].ljust(10, ' ')
-    ref = package['source']['reference']
+    ref = (package['source'] && package['source']['reference']) || '?'
 
     packages[package['name']] = "#{version} #{ref}"
 end
 
 json_dev_packages.each do |package|
     version = package['version'].ljust(10, ' ')
-    ref = package['source']['reference']
+    ref = (package['source'] && package['source']['reference']) || '?'
 
     packages["#{package['name']} (dev)"] = "#{version} #{ref}"
 end
