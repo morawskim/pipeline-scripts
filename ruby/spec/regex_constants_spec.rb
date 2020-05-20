@@ -45,4 +45,7 @@ RSpec.describe RegexConstants, "Check commit message" do
       expect("#47 - budowanie w procesie CI dokumentacji API (swagger-ui)").to match(RegexConstants::COMMIT_TITLE_REGEX)
   end
 
+  it "should allow for & sign in commit subject" do
+      expect("#127 - formularz profilu zbudowany w oparciu o formik & react-async").to match(RegexConstants::COMMIT_TITLE_REGEX)
+  end
 end
