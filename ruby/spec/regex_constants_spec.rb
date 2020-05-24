@@ -48,4 +48,8 @@ RSpec.describe RegexConstants, "Check commit message" do
   it "should allow for & sign in commit subject" do
       expect("#127 - formularz profilu zbudowany w oparciu o formik & react-async").to match(RegexConstants::COMMIT_TITLE_REGEX)
   end
+
+  it "should allow for colon in commit subject" do
+      expect("#25 TS: strict mode").to match(RegexConstants::COMMIT_TITLE_REGEX)
+  end
 end
