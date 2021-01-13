@@ -56,4 +56,8 @@ RSpec.describe RegexConstants, "Check commit message" do
   it "should allow for the depabot's commit subject with at symbol" do
       expect("#56 npm: Bump @types/react-router-dom from 5.1.5 to 5.1.6 in /frontend").to match(RegexConstants::COMMIT_TITLE_REGEX)
   end
+
+  it "should allow for the comma" do
+      expect("#141 Foo, but bar").to match(RegexConstants::COMMIT_TITLE_REGEX)
+  end
 end
