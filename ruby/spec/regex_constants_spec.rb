@@ -60,4 +60,8 @@ RSpec.describe RegexConstants, "Check commit message" do
   it "should allow for the comma" do
       expect("#141 Foo, but bar").to match(RegexConstants::COMMIT_TITLE_REGEX)
   end
+
+  it "should allow backslash" do
+      expect('#5 update package foo\bar').to match(RegexConstants::COMMIT_TITLE_REGEX)
+  end
 end
