@@ -64,4 +64,8 @@ RSpec.describe RegexConstants, "Check commit message" do
   it "should allow backslash" do
       expect('#5 update package foo\bar').to match(RegexConstants::COMMIT_TITLE_REGEX)
   end
+
+  it "should allow caret" do
+      expect('#539 Restrict symplify/phpstan-rules version to ^10.1').to match(RegexConstants::COMMIT_TITLE_REGEX)
+  end
 end
